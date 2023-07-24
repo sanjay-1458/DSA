@@ -1,37 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Graph
+void AdjacencyMatrix()
 {
-public:
-    unordered_map<int, list<int>> adjacencyList;
-    void addEdge(int u, int v, bool direction)
-    {
-        adjacencyList[u].push_back(v);
-        if (!direction)
-        {
-            adjacencyList[v].push_back(u);
-        }
-    }
-    void printGraph()
-    {
-        for (auto e : adjacencyList)
-        {
-            cout << e.first << " : ";
-            for (auto i : e.second)
-            {
-                cout << i << " ";
-            }
-            cout << endl;
-        }
-    }
-};
-
-void Matrix()
-{
-    int adjacencyMatrix[13][13] = {0};
-    int nodes = 0, edges = 0;
+    int nodes, edges;
     cin >> nodes >> edges;
+    int adjacencyMatrix[nodes + 1][nodes + 1] = {0};
     for (int i = 0; i < edges; ++i)
     {
         int u, v;
@@ -48,22 +22,54 @@ void Matrix()
         cout << endl;
     }
 }
-void List()
+
+void AdjacencyList()
 {
     int nodes, edges;
     cin >> nodes >> edges;
-    class Graph G;
+    unordered_map<int, list<int>> adjacencyList;
     for (int i = 0; i < edges; ++i)
     {
         int u, v;
         cin >> u >> v;
-        G.addEdge(u, v, 0);
+        adjacencyList[u].push_back(v);
+        adjacencyList[v].push_back(u);
     }
-    G.printGraph();
+    for (auto e : adjacencyList)
+    {
+        cout << e.first << " : ";
+        for (auto i : e.second)
+        {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
+}
+
+void AdjacencyList2()
+{
+    int nodes, edges;
+    cin >> nodes >> edges;
+    vector<int> adjacencyList[nodes + 1];
+    for (int i = 0; i < edges; ++i)
+    {
+        int u, v;
+        cin >> u >> v;
+        adjacencyList[u].push_back(v);
+        adjacencyList[v].push_back(u);
+    }
+    for (int i = 1; i <= nodes; ++i)
+    {
+        cout << i << " : ";
+        for (auto e : adjacencyList[i])
+        {
+            cout << e << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main()
 {
-    Matrix();
-    List();
+    AdjacencyList2();
 }
