@@ -1,4 +1,5 @@
-vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+vector<int> sortA1ByA2(vector<int> arr1, int N, vector<int> arr2, int M) 
+    {
         vector<int> v;
         unordered_map<int,int> mp1;
         map<int,int> mp2;
@@ -22,4 +23,4 @@ vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
             }
         }
         return v;
-    }
+    } 
