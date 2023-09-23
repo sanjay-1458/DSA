@@ -24,3 +24,29 @@ vector<int> sortA1ByA2(vector<int> arr1, int N, vector<int> arr2, int M)
         }
         return v;
     } 
+
+vector<int> sortA1ByA2(vector<int> A1, int N, vector<int> A2, int M) 
+{
+    //Your code here
+    vector<int> ans;
+    map<int,int> mp;;
+    for(int i=0;i<N;++i){
+        mp[A1[i]]++;
+    }
+    for(int i=0;i<M;++i){
+        int el=A2[i];
+        int freq=mp[A2[i]];
+        while(freq--){
+            ans.push_back(el);
+        }
+        mp.erase(el);
+    }
+    for(auto x:mp){
+        int el=x.first;
+        int freq=x.second;
+        while(freq--){
+            ans.push_back(el);
+        }
+    }
+    return ans;
+} 
