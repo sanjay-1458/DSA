@@ -1,4 +1,3 @@
-#include <stdio.h>
 
 // Syntax
 /*
@@ -28,10 +27,28 @@ structure_name.member2;
 
 */
 
+#include <stdio.h>
 
+struct book{
+    float price;
+    int pages;
+    char name[50];
+};
 
 int main()
 {
-
+    struct book book;
+    printf("Enter the book name:\n");
+    fgets(book.name,sizeof(book.name),stdin);
+    printf("Enter the book price:\n");
+    scanf("%f",&book.price);
+    printf("Enter the number of pages in book:\n");
+    scanf("%d",&book.pages);
+    printf("\n");
+    printf("Name: ");
+    puts(book.name);
+    printf("\nPrice: %f",book.price);
+    printf("\nNumber of pages: %d",book.pages);
+    printf("\n");
     return 0;
 }
