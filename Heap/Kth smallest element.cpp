@@ -7,6 +7,9 @@
         //code here
         priority_queue<int> pq;
         for(int i=l;i<=r;++i){
+            if(pq.size()==k && pq.top()<arr[i]){
+                continue;
+            }
             pq.push(arr[i]);
             if(pq.size()>k){
                 pq.pop();
