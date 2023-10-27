@@ -33,16 +33,16 @@ int sumsubarrayk2(vector<int> arr, int k)
     int i = 0, j = 0;
     int sum = 0;
     while (j < n)
-    {
+    {                                    // include the calculation of new element (calculation for new element)
         sum = sum + arr[j];
-        if (j - i + 1 < k)
+        if (j - i + 1 < k)                // if window size is less than the required window size -> increase the size of window
         {
             j++;
         }
-        else if (j - i + 1 == k)
+        else if (j - i + 1 == k)        // if window size == required size -> perform calculation and slide the window
         {
             res = max(res, sum);
-            sum = sum - arr[i];
+            sum = sum - arr[i];           // remove the calculation of the ith element
             i++;
             j++;
         }
