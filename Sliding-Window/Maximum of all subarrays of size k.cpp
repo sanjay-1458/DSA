@@ -1,76 +1,75 @@
+//{ Driver Code Starts
+//Initial template for C++
+
 #include <bits/stdc++.h>
 using namespace std;
 
-#define endl '\n'
-#define int long long
-#define sz(v) (int)v.size()
 
-const int MOD = 1e9 + 7;
-const int INF = LLONG_MAX >> 1;
+// } Driver Code Ends
+//User function template for C++
 
-// TC: O(n2)
-// SC: O(1)
-vector<int> maxofsubarray1(vector<int> arr, int k)
+class Solution
 {
-    vector<int> v;
-    int n = arr.size();
-    for (int i = 0; i < n - k + 1; ++i)
+  public:
+    //Function to find maximum of each subarray of size k.
+    vector <int> max_of_subarrays(int *arr, int n, int k)
     {
-        int mx = INT_MIN;
-        for (int j = i; j < i + k; ++j)
-        {
-            mx = max(mx, arr[j]);
-        }
-        v.push_back(mx);
-    }
-    return v;
-}
-
-// TC: O(n)
-// SC: O(n-k+1)
-vector<int> maxofsubarray2(vector<int> arr, int k)
-{
-    vector<int> v;
-    int i = 0, j = 0, n = arr.size();
-    deque<int> dq;
-    while (j < n)
-    {
-        if (dq.empty())
-        {
-            dq.push_back(arr[j]);
-        }
-        else if (dq.back() < arr[j])
-        {
-            while (dq.size() > 0 && dq.back() < arr[j])
-            {
-                dq.pop_back();
+        // your code here
+        deque<int> dq;
+        int i=0,j=0;
+        vector<int> ans;
+        while(j<n){
+            if(dq.empty()){
+                dq.push_back(arr[j]);
             }
-            dq.push_back(arr[j]);
-        }
-        else
-        {
-            dq.push_back(arr[j]);
-        }
-        if (j - i + 1 < k)
-        {
-            j++;
-        }
-        else
-        {
-            v.push_back(dq.front());
-            if (arr[i] == dq.front())
-            {
-                dq.pop_front();
+            else if(dq.back()>=arr[j]){
+                dq.push_back(arr[j]);
             }
-            i++;
-            j++;
+            else{
+                while(!dq.empty() && dq.back()<arr[j]){
+                    dq.pop_back();
+                }
+                dq.push_back(arr[j]);
+            }
+            if(j-i+1<k){
+                j++;
+            }
+            else if(j-i+1==k){
+                ans.push_back(dq.front());
+                if(arr[i]==dq.front()){
+                    dq.pop_front();
+                }
+                i++;
+                j++;
+            }
         }
+        return ans;
     }
-    return v;
-}
+};
 
-int32_t main()
-{
-    vector<int> arr = {1, 2, 3, 1, 3, 5, 3, 1, 4};
-    cout << maxofsubarray(arr, 3);
+//{ Driver Code Starts.
+
+int main() {
+	
+	int t;
+	cin >> t;
+	
+	while(t--){
+	    
+	    int n, k;
+	    cin >> n >> k;
+	    
+	    int arr[n];
+	    for(int i = 0;i<n;i++) 
+	        cin >> arr[i];
+	    Solution ob;
+	    vector <int> res = ob.max_of_subarrays(arr, n, k);
+	    for (int i = 0; i < res.size (); i++) 
+	        cout << res[i] << " ";
+	    cout << endl;
+	    
+	}
+	
+	return 0;
 }
+// } Driver Code Ends
