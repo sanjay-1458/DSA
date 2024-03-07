@@ -1,0 +1,103 @@
+#include <iostream>
+#include <stack>
+// #include <stdlib.h>
+// #include <cstdlib>
+using namespace std;
+
+class Stack
+{
+    stack<int> stk, mini;
+    int maxSize;
+    int top;
+    public:
+    Stack()
+    {
+        maxSize = 100;
+        top = -1;
+    }
+    void push(int data);
+    void pop();
+    bool isEmpty();
+    bool isFull();
+    int getMin();
+};
+bool Stack::isEmpty()
+{
+    if (top == -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Stack::isFull()
+{
+    if (top == maxSize - 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Stack::push(int data)
+{
+    if (top==maxSize-1)
+    {
+        std::cout << "Overflow" << endl;
+        return;
+    }
+    stk.push(data);
+    if (top==-1)
+    {
+        mini.push(data);
+    }
+    else
+    {
+        mini.push(min(stk.top(), mini.top()));
+    }
+    top++;
+}
+void Stack::pop()
+{
+    if (isEmpty())
+    {
+        std::cout << "Underflow" << endl;
+        return;
+    }
+    std::cout << stk.top() << endl;
+    stk.pop();
+    mini.pop();
+    top--;
+}
+int Stack::getMin()
+{
+    return mini.top();
+}
+void display(class Stack s){
+    while(!s.isEmpty()){
+        s.pop();
+    }
+}
+int main()
+{
+    class Stack s;
+    s.push(18);
+    cout<<s.getMin();
+    s.push(19);
+    cout<<s.getMin();
+    s.push(29);
+    cout<<s.getMin();
+    s.push(19);
+    cout<<s.getMin();
+    s.push(16);
+    cout<<s.getMin();
+    s.push(18);
+    cout<<s.getMin();
+    display(s);
+}
